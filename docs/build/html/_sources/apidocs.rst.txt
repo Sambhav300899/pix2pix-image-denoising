@@ -6,42 +6,42 @@ spacesenseds
 
 augmentations
 -------------
-.. automodule:: augmentations
+.. automodule:: pix2pix.augmentations
    :members:
    :member-order: bysource
    :private-members:
 
 dataloader
 ------------
-.. automodule:: dataloader
+.. automodule:: pix2pix.dataloader
    :members:
    :member-order: bysource
    :private-members:
 
 helper
 ----------
-.. automodule:: helper
+.. automodule:: pix2pix.helper
    :members:
    :member-order: bysource
    :private-members:
 
 losses
 ----------
-.. automodule:: losses
+.. automodule:: pix2pix.losses
    :members:
    :member-order: bysource
    :private-members:
 
 metrics
 ----------
-.. automodule:: metrics
+.. automodule:: pix2pix.metrics
    :members:
    :member-order: bysource
    :private-members:
 
 models
 -------
-.. automodule:: models
+.. automodule:: pix2pix.models
    :members:
    :member-order: bysource
    :private-members:

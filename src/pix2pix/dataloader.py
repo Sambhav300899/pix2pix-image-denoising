@@ -1,8 +1,7 @@
 import torch
-import helper
 from typing import List
 import logging
-import augmentations
+from pix2pix import augmentations, helper
 
 logger = logging.getLogger(__name__)
 

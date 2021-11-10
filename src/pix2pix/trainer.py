@@ -1,11 +1,11 @@
-import losses
+from pix2pix import losses
 import tqdm
 import torch
 import os
-import helper
+from pix2pix import helper
 import matplotlib.pyplot as plt
-import dataloader
-import augmentations
+from pix2pix import dataloader
+from pix2pix import augmentations
 import pytorch_msssim
 import mlflow
 import logging
@@ -226,7 +226,7 @@ class pix2pix_trainer:
 
             # desired targets for the discriminator
             self.optim_d.zero_grad()
-            real_target = torch.ones(ip.shape[0], 1, 30, 30).to(self.device)
+            real_target = torch.ones(ip.shape[0], 1, 30, 30).to(self.device) - 0.2
             fake_target = torch.zeros(ip.shape[0], 1, 30, 30).to(self.device)
 
             # get preds from generator

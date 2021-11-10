@@ -5,9 +5,10 @@ In this use case the model is trained for image Denoising using the lfw dataset,
 to train the model on another dataset.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Table of Contents
 
+   installation
    apidocs
 
 Indices and tables

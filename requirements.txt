@@ -1,0 +1,11 @@
+matplotlib==3.3.4
+mlflow==1.21.0
+numpy==1.19.5
+opencv_python==4.5.4.58
+pydantic==1.8.2
+pytorch_msssim==0.2.1
+scikit_image==0.17.2
+setuptools==58.5.3
+torch==1.10.0+cu113
+torchvision==0.11.1+cu113
+tqdm==4.62.3

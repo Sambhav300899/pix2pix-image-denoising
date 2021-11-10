@@ -36,7 +36,7 @@ aug_config = Augmentations()
 
 
 class Model(BaseSettings):
-    GEN_ARGS: dict = dict(input_nc=3, output_nc=3, num_init_filters=64, use_dropout=True)
+    GEN_ARGS: dict = dict(input_nc=3, output_nc=3, num_init_filters=64, use_dropout=False)
     DISC_ARGS: dict = dict(input_nc=6)
 
 

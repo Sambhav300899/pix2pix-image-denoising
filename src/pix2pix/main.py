@@ -1,11 +1,11 @@
-import dataloader
-import models
-import augmentations
+from pix2pix import dataloader
+from pix2pix import models
+from pix2pix import augmentations
 import pathlib
 import torch
-import helper
-import trainer
-from config import dataset, aug_config, model, settings, training
+from pix2pix import helper
+from pix2pix import trainer
+from pix2pix.config import dataset, aug_config, model, settings, training
 import datetime as dt
 import os
 import mlflow
