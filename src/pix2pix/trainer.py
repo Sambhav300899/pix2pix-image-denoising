@@ -8,28 +8,51 @@ import dataloader
 import augmentations
 import pytorch_msssim
 import mlflow
+import logging
+from typing import List
+
+logger = logging.getLogger(__name__)
 
 plt.ioff()
 
 
 class pix2pix_trainer:
+    """
+    trainer class, this handles plotting, saving metrics, plotting sample imgs etc.
+
+    gen (py:obj:`torch.nn.Module`): generator model
+    disc (py:obj:`torch.nn.Module`): discriminator model
+    train_dataloader(py:obj:`torch.utils.data.DataLoader`): train dataloader
+    val_dataloader(py:obj:`torch.utils.data.DataLoader`): val dataloader
+    optim_d (py:obj:`torch.optim.Adam`): optimizer for discriminator
+    optim_g (py:obj:`torch.optim.Adam`): optimizer for generator
+    model_name (str): model name
+    log_mlflow_metrics (bool): flag to log mlfow metrics
+    model_save_dir (str): directory to save the model
+    device (str): device for computation
+    history (dict): history data if loading old checkpoint
+    save_checkpoints (bool): flag to save checkpoints
+    sample_img_list(List[str]): list of images to be used for sample plots
+    img_size (List[int]): img_size
+    """
+
     def __init__(
         self,
-        gen,
-        disc,
-        train_dataloader,
-        val_dataloader,
-        optim_d,
-        optim_g,
-        model_name,
-        log_mlflow_metrics,
-        model_save_dir="./generated",
-        device="cpu",
-        history=None,
-        save_checkpoints=False,
-        sample_img_list=None,
-        img_size=(256, 256),
-    ):
+        gen: torch.nn.Module,
+        disc: torch.nn.Module,
+        train_dataloader: torch.utils.data.DataLoader,
+        val_dataloader: torch.utils.data.DataLoader,
+        optim_d: torch.optim.Adam,
+        optim_g: torch.optim.Adam,
+        model_name: str,
+        log_mlflow_metrics: bool,
+        model_save_dir: str = "./generated",
+        device: str = "cpu",
+        history: dict = None,
+        save_checkpoints: bool = False,
+        sample_img_list: List[str] = None,
+        img_size: List[int] = (256, 256),
+    ) -> None:
         self.gen = gen.to(device)
         self.disc = disc.to(device)
         self.train_dataloader = train_dataloader
@@ -43,6 +66,8 @@ class pix2pix_trainer:
         self.img_size = img_size
         self.model_name = model_name
         self.log_mlflow_metrics = log_mlflow_metrics
+
+        logger.debug(f"got {len(self.sample_img_list)} imgs to plot per epoch")
 
         if sample_img_list:
             self.noise_vector = torch.zeros(([len(sample_img_list), 3, self.img_size[0], self.img_size[1]]))
@@ -62,7 +87,11 @@ class pix2pix_trainer:
 
         self._create_dirs()
 
-    def _create_dirs(self):
+    def _create_dirs(self) -> None:
+        """
+        method to create directories to save data
+        """
+        logger.debug("creating directories to store data")
         self.checkpoint_dir = os.path.join(self.model_save_dir, "checkpoints")
         self.plot_dir = os.path.join(self.model_save_dir, "plots")
         self.sample_plots_dir = os.path.join(self.model_save_dir, "sample_img_plots")
@@ -71,7 +100,15 @@ class pix2pix_trainer:
         os.makedirs(self.plot_dir, exist_ok=True)
         os.makedirs(self.sample_plots_dir, exist_ok=True)
 
-    def _reset_history(self):
+    def _reset_history(self) -> dict:
+        """
+        method to initialise metrics dictionary
+
+        Returns:
+        (dict): metric dict
+        """
+        logger.debug("reset history dict")
+
         return {
             "gen_loss": [],
             "disc_loss": [],
@@ -84,11 +121,23 @@ class pix2pix_trainer:
             # "val_psnr": [],
         }
 
-    def _log_mlflow_metrics_for_epoch(self, epoch):
+    def _log_mlflow_metrics_for_epoch(self, epoch: int) -> None:
+        """
+        method to log mlflow metrics
+
+        Args:
+            epoch (int): epoch number
+        """
         for metric_name, metric_value in self.history.items():
             mlflow.log_metric(metric_name, metric_value[-1], step=epoch)
 
-    def train(self, num_epochs):
+    def train(self, num_epochs: int) -> None:
+        """
+        train the model for specified number of epochs, log metrics, save checkpoints and save all training + model assets
+
+        Args:
+            num_epochs (int): number of epochs to train the model
+        """
         for epoch in range(1, num_epochs + 1):
             print(f"Epoch {epoch}/{num_epochs}")
             gen_loss, disc_loss, mae_loss, ssim = self._train_step()
@@ -109,24 +158,39 @@ class pix2pix_trainer:
             print()
 
             if self.save_checkpoints:
+                logger.debug(f"saving checkpoint for epoch {epoch}")
                 self._save_checkpoint(epoch)
 
             if self.sample_img_list:
+                logger.debug(f"saving sample img plots for epoch {epoch}")
                 self._plot_sample_imgs(epoch)
 
             if self.log_mlflow_metrics:
+                logger.debug(f"logging mlflow metrics for epoch {epoch}")
                 self._log_mlflow_metrics_for_epoch(epoch)
 
         self._plot()
         gen_save_path = os.path.join(self.model_save_dir, "gen_" + self.model_name + ".pth")
         disc_save_path = os.path.join(self.model_save_dir, "disc_" + self.model_name + ".pth")
 
+        logger.info(f"saving final generator model to {gen_save_path}")
         torch.save(self.gen, gen_save_path)
+
+        logger.info(f"saving final discriminator model to {disc_save_path}")
         torch.save(self.disc, disc_save_path)
 
+        logger.info(f"saving model history to {self.model_save_dir}")
         helper.save_json(self.history, os.path.join(self.model_save_dir, "history.json"))
 
-    def test(self, dataloader):
+    def test(self, dataloader: torch.utils.data.DataLoader) -> dict:
+        """
+        test the model for specified dataloader
+
+        Args:
+            dataloader (py:obj:`torch.utils.data.DataLoader`): dataloader to make predictions on
+        Returns:
+            (dict): return dictionary of metrics
+        """
         test_gen_loss, test_mae, test_ssim = self._test_step(dataloader=dataloader)
 
         return {
@@ -135,64 +199,13 @@ class pix2pix_trainer:
             "test_ssim": test_ssim,
         }
 
-    def _plot_sample_imgs(self, epoch_num):
-        self.gen.eval()
-        self.disc.eval()
+    def _train_step(self) -> List[float]:
+        """
+        single train step for the model
 
-        sample_dataloader = dataloader.lfw_dataset(
-            img_paths=self.sample_img_list,
-            transforms=augmentations.augs(gaussian_noise=False),
-        )
-
-        n_rows = 10
-        n_cols = 3
-
-        fig = plt.figure(figsize=(10, 45))
-        k = 0
-
-        for i in range(0, n_cols * n_rows - 1, n_cols):
-            ip, tgt = sample_dataloader[k]
-            ip = ip.unsqueeze(0) + self.noise_vector[k, :, :, :]
-            ip = ip.clip(-1, 1)
-            ip = ip.to(self.device)
-
-            pred = self.gen(ip)
-            pred = pred.squeeze().detach().to("cpu")
-            ip = ip.squeeze().to("cpu")
-
-            # cast to 0,1 to display
-            ip = (ip + 1) / 2
-            tgt = (tgt + 1) / 2
-            pred = (pred + 1) / 2
-
-            ax = fig.add_subplot(n_rows, n_cols, i + 1)
-            ax.imshow(ip.permute(1, 2, 0))
-            ax.axis("off")
-
-            if i == 0:
-                ax.set_title("Input", fontsize=20)
-
-            ax = fig.add_subplot(n_rows, n_cols, i + 2)
-            ax.imshow(tgt.permute(1, 2, 0))
-            ax.axis("off")
-
-            if i == 0:
-                ax.set_title("Target", fontsize=20)
-
-            ax = fig.add_subplot(n_rows, n_cols, i + 3)
-            ax.imshow(pred.permute(1, 2, 0))
-            ax.axis("off")
-
-            if i == 0:
-                ax.set_title("Predicted", fontsize=20)
-
-            k = k + 1
-
-        fig.tight_layout()
-        plt.savefig(os.path.join(self.sample_plots_dir, f"epoch_{epoch_num}_samples.png"))
-        plt.close()
-
-    def _train_step(self):
+        Returns:
+            (List[float]): return epoch losses and metrics
+        """
         self.gen.train()
         self.disc.train()
 
@@ -208,7 +221,6 @@ class pix2pix_trainer:
         )
 
         for i, (ip, tgt) in progbar:
-
             ip = ip.to(self.device)
             tgt = tgt.to(self.device)
 
@@ -278,7 +290,13 @@ class pix2pix_trainer:
 
         return epoch_gen_loss, epoch_disc_loss, epoch_mae_loss, epoch_ssim
 
-    def _test_step(self, dataloader):
+    def _test_step(self, dataloader: torch.utils.data.DataLoader) -> List[float]:
+        """
+        single test step for the model
+
+        Returns:
+            (List[float]): return epoch losses and metrics
+        """
         self.gen.eval()
         self.disc.eval()
 
@@ -325,7 +343,73 @@ class pix2pix_trainer:
 
         return test_gen_loss, test_mae_loss, test_ssim
 
-    def _save_checkpoint(self, epoch_num):
+    def _plot_sample_imgs(self, epoch_num: int) -> None:
+        """
+        plot sample images for the model after every epoch
+        """
+        self.gen.eval()
+        self.disc.eval()
+
+        sample_dataloader = dataloader.lfw_dataset(
+            img_paths=self.sample_img_list,
+            transforms=augmentations.augs(gaussian_noise=False),
+        )
+
+        n_rows = 10
+        n_cols = 3
+
+        fig = plt.figure(figsize=(10, 45))
+        k = 0
+
+        for i in range(0, n_cols * n_rows - 1, n_cols):
+            ip, tgt = sample_dataloader[k]
+            ip = ip.unsqueeze(0) + self.noise_vector[k, :, :, :]
+            ip = ip.clip(-1, 1)
+            ip = ip.to(self.device)
+
+            pred = self.gen(ip)
+            pred = pred.squeeze().detach().to("cpu")
+            ip = ip.squeeze().to("cpu")
+
+            # cast to 0,1 to display
+            ip = (ip + 1) / 2
+            tgt = (tgt + 1) / 2
+            pred = (pred + 1) / 2
+
+            ax = fig.add_subplot(n_rows, n_cols, i + 1)
+            ax.imshow(ip.permute(1, 2, 0))
+            ax.axis("off")
+
+            if i == 0:
+                ax.set_title("Input", fontsize=20)
+
+            ax = fig.add_subplot(n_rows, n_cols, i + 2)
+            ax.imshow(tgt.permute(1, 2, 0))
+            ax.axis("off")
+
+            if i == 0:
+                ax.set_title("Target", fontsize=20)
+
+            ax = fig.add_subplot(n_rows, n_cols, i + 3)
+            ax.imshow(pred.permute(1, 2, 0))
+            ax.axis("off")
+
+            if i == 0:
+                ax.set_title("Predicted", fontsize=20)
+
+            k = k + 1
+
+        fig.tight_layout()
+        plt.savefig(os.path.join(self.sample_plots_dir, f"epoch_{epoch_num}_samples.png"))
+        plt.close()
+
+    def _save_checkpoint(self, epoch_num: int) -> None:
+        """
+        save model checkpoint
+
+        Args:
+            epoch_num (int): epoch number to save model for
+        """
         gen_ckpt_save_path = os.path.join(
             self.checkpoint_dir,
             f"gen_epoch_{epoch_num}_" + self.model_name + ".pth",
@@ -338,13 +422,12 @@ class pix2pix_trainer:
         torch.save(self.gen, gen_ckpt_save_path)
         torch.save(self.disc, disc_ckpt_save_path)
 
-    def _plot(self):
+    def _plot(self) -> None:
         """
         plot model training metrics
-
-        Args -
-            history (dict): history dict from trained model
         """
+        logger.info(f"saving model training plots to {self.plot_dir}")
+
         metric_keys = self.history.keys()
         metric_keys = [key for key in metric_keys if key[:4] != "val_"]
 

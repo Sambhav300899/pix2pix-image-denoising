@@ -1,6 +1,12 @@
 from pydantic import BaseSettings
 from typing import List
 import torch
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(process)d -- [%(threadName)s] %(name)s : %(message)s",
+)
 
 
 class Dataset(BaseSettings):
@@ -14,7 +20,7 @@ class Dataset(BaseSettings):
     SHUFFLE_TRAIN: bool = True
     SHUFFLE_VAL: bool = False
     SHUFFLE_TEST: bool = False
-    BATCH_SIZE: int = 32
+    BATCH_SIZE: int = 16
 
 
 dataset = Dataset()
@@ -30,8 +36,7 @@ aug_config = Augmentations()
 
 
 class Model(BaseSettings):
-    GEN_ARGS: dict = dict(input_nc=3, output_nc=3, num_init_filters=32, use_dropout=False)
-
+    GEN_ARGS: dict = dict(input_nc=3, output_nc=3, num_init_filters=64, use_dropout=True)
     DISC_ARGS: dict = dict(input_nc=6)
 
 
@@ -39,7 +44,7 @@ model = Model()
 
 
 class Settings(BaseSettings):
-    CHECKPOINT_PATH = ""
+    CHECKPOINT_PATH: str = ""
     CONTINUE_FROM_CHECKPOINT: bool = True if CHECKPOINT_PATH else False
     SAVE_DIRECTORY = "../../models"
     DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -51,11 +56,8 @@ settings = Settings()
 class Training(BaseSettings):
     GEN_LR: float = 2e-4
     DISC_LR: float = 2e-4
-    EPOCHS: int = 2
+    EPOCHS: int = 10
     SAVE_CHECKPOINTS: bool = True
 
 
 training = Training()
-
-
-NOTE = ""

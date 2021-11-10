@@ -3,17 +3,31 @@ from torch import nn
 
 
 class unet_skip_connection_block(nn.Module):
+    """
+    skip connection block to build u-net recursively from the center to sides
+
+    Args:
+        outer_nc (int): outer number of channels
+        inner_nc (int): inner number of channels
+        input_nc (int): number of input channels
+        submodule (nn.Module): submodule for already constructed Unet
+        outermost (bool): bool to identify outermost layers
+        innermost (bool): bool to identify innermost layers
+        norm_layer (nn.Module): normalisation layer for the network
+        use_dropout (nn.Module): bool to use dropout in the model
+    """
+
     def __init__(
         self,
-        outer_nc,
-        inner_nc,
-        input_nc=None,
-        submodule=None,
-        outermost=False,
-        innermost=False,
-        norm_layer=nn.BatchNorm2d,
-        use_dropout=False,
-    ):
+        outer_nc: int,
+        inner_nc: int,
+        input_nc: int = None,
+        submodule: nn.Module = None,
+        outermost: bool = False,
+        innermost: bool = False,
+        norm_layer: nn.Module = nn.BatchNorm2d,
+        use_dropout: bool = False,
+    ) -> None:
         super().__init__()
         self.outermost = outermost
 
@@ -77,7 +91,15 @@ class unet_skip_connection_block(nn.Module):
 
         self.model = nn.Sequential(*model)
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Run forward pass for the network/layer
+
+        Args:
+            x (py:obj:`torch.Tensor`): input tensor
+        Returns:
+            (py:obj:`torch.Tensor`): output tensor
+        """
         if self.outermost:
             return self.model(x)
         else:
@@ -85,14 +107,25 @@ class unet_skip_connection_block(nn.Module):
 
 
 class unet(nn.Module):
+    """
+    skip connection block to build u-net recursively from the center to sides
+
+    Args:
+        input_nc (int): number of input channels
+        output_nc (int): number of output channels
+        num_init_filters (int): number of filters in the first layer, subsequent layers are multiples of this
+        norm_layer (nn.Module): normalisation layer for the network
+        use_dropout (nn.Module): bool to use dropout in the model
+    """
+
     def __init__(
         self,
         input_nc: int,
         output_nc: int,
         num_init_filters: int = 64,
-        norm_layer=nn.BatchNorm2d,
-        use_dropout=False,
-    ):
+        norm_layer: nn.Module = nn.BatchNorm2d,
+        use_dropout: bool = False,
+    ) -> None:
         super().__init__()
 
         unet_block = unet_skip_connection_block(
@@ -143,18 +176,37 @@ class unet(nn.Module):
             norm_layer=norm_layer,
         )
 
-    def forward(self, input):
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
+        """
+        Run forward pass for the network/layer
+
+        Args:
+            x (py:obj:`torch.Tensor`): input tensor
+        Returns:
+            (py:obj:`torch.Tensor`): output tensor
+        """
         return self.model(input)
 
 
 class patchGAN(nn.Module):
+    """
+    skip connection block to build u-net recursively from the center to sides
+
+    Args:
+        input_nc (int): number of input channels
+        num_init_filters (int): number of filters in the first layer, subsequent layers are multiples of this
+        num_layers (int): number of layers
+        norm_layer (nn.Module): normalisation layer for the network
+    """
+
     def __init__(
         self,
-        input_nc,
-        num_init_filters=64,
-        num_layers=3,
-        norm_layer=nn.BatchNorm2d,
-    ):
+        input_nc: int,
+        num_init_filters: int = 64,
+        num_layers: int = 3,
+        norm_layer: nn.Module = nn.BatchNorm2d,
+    ) -> None:
+
         super().__init__()
 
         layer_list = [
@@ -225,5 +277,13 @@ class patchGAN(nn.Module):
 
         self.model = nn.Sequential(*layer_list)
 
-    def forward(self, input):
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
+        """
+        Run forward pass for the network/layer
+
+        Args:
+            x (py:obj:`torch.Tensor`): input tensor
+        Returns:
+            (py:obj:`torch.Tensor`): output tensor
+        """
         return self.model(input)

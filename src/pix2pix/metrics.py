@@ -1,7 +1,18 @@
 from skimage.metrics import structural_similarity, peak_signal_noise_ratio
+import torch
 
 
-def ssim(tensor_1, tensor_2):
+def ssim(tensor_1: torch.Tensor, tensor_2: torch.Tensor) -> torch.Tensor:
+    """
+    Calculate ssim between two tensors (does not work for batches)
+
+    Args:
+        tensor_1 (py:obj:`Torch.Tensor`):  tensor_1
+        tensor_2 (py:obj:`Torch.Tensor`): tensor_2
+    Return:
+        score (float): ssim score
+    """
+
     tensor_1 = tensor_1.permute((1, 2, 0))
     tensor_2 = tensor_2.permute((1, 2, 0))
 
@@ -10,7 +21,16 @@ def ssim(tensor_1, tensor_2):
     return score
 
 
-def psnr(tensor_1, tensor_2):
+def psnr(tensor_1: torch.Tensor, tensor_2: torch.Tensor) -> torch.Tensor:
+    """
+    Calculate psnr between two tensors (does not work for batches)
+
+    Args:
+        tensor_1 (py:obj:`Torch.Tensor`):  tensor_1
+        tensor_2 (py:obj:`Torch.Tensor`): tensor_2
+    Return:
+        score (float): psnr score
+    """
     tensor_1 = tensor_1.permute((1, 2, 0))
     tensor_2 = tensor_2.permute((1, 2, 0))
 
@@ -19,7 +39,16 @@ def psnr(tensor_1, tensor_2):
     return score
 
 
-def ssim_for_batch(batch_1, batch_2):
+def ssim_for_batch(batch_1: torch.Tensor, batch_2: torch.Tensor) -> torch.Tensor:
+    """
+    Calculate ssim between two tensor batches
+
+    Args:
+        tensor_1 (py:obj:`Torch.Tensor`):  tensor_1
+        tensor_2 (py:obj:`Torch.Tensor`): tensor_2
+    Return:
+        score (float): ssim score
+    """
     ssim_list = []
 
     for i in range(batch_1.shape[0]):
@@ -28,7 +57,17 @@ def ssim_for_batch(batch_1, batch_2):
     return sum(ssim_list) / batch_1.shape[0]
 
 
-def psnr_for_batch(batch_1, batch_2):
+def psnr_for_batch(batch_1: torch.Tensor, batch_2: torch.Tensor) -> torch.Tensor:
+    """
+    Calculate psnr between two tensor batches
+
+    Args:
+        tensor_1 (py:obj:`Torch.Tensor`):  tensor_1
+        tensor_2 (py:obj:`Torch.Tensor`): tensor_2
+    Return:
+        score (float): psnr score
+    """
+
     psnr_list = []
 
     for i in range(batch_1.shape[0]):

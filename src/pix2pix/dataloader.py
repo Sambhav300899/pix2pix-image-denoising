@@ -1,6 +1,10 @@
 import torch
 import helper
 from typing import List
+import logging
+import augmentations
+
+logger = logging.getLogger(__name__)
 
 
 class lfw_dataset(torch.utils.data.Dataset):
@@ -8,43 +12,44 @@ class lfw_dataset(torch.utils.data.Dataset):
     Class to load the lfw dataset for an image to image translation model. Pass
     the operations to be applied to the input image as transforms to the class.
 
-    For model training -
-        target = image from lfw dataset
-        input = image from lfw dataset specified transforms
-
-    The structure of the dataset is -
-
-    rootdir
-        '--name_of_person_1
-            '--img_of_person_1_a.jpg
-            '--img_of_person_1_b.jpg
-            .
-            .
-        .
-        .
-        .
-        '--name_of_person_n
-            '--img_of_person_n_a.jpg
-            .
-            .
+    For model training
+    target = image from lfw dataset
+    input = image from lfw dataset specified transforms
 
     Args:
         rootdir (str): path to rootdir of dataset
-        transforms (List[:py:ovj:`torchvision.transforms`]): transforms to be applied to output img,
+        transforms (List[:py:obj:`torchvision.transforms`]): transforms to be applied to output img,
                     defaults to None
 
-    Returns:
     """
 
     def __init__(
         self,
-        img_paths,
-        transforms: List = None,
-    ):
+        img_paths: List[str],
+        transforms: augmentations.augs = None,
+    ) -> None:
+        """
+
+        The structure of the dataset is -
+
+        rootdir
+            '--name_of_person_1
+                '--img_of_person_1_a.jpg
+                '--img_of_person_1_b.jpg
+                .
+                .
+            .
+            .
+            .
+            '--name_of_person_n
+                '--img_of_person_n_a.jpg
+                .
+                .
+        """
         self.file_list = img_paths
         self.transforms = transforms
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         get the number of samples in the dataset
 
@@ -53,7 +58,7 @@ class lfw_dataset(torch.utils.data.Dataset):
         """
         return len(self.file_list)
 
-    def __getitem__(self, idx: List[int]):
+    def __getitem__(self, idx: List[int]) -> List[torch.Tensor]:
         """
         get item at given idx from dataset
 
