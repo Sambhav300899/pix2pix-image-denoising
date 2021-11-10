@@ -38,8 +38,8 @@ class augs:
                 x = torchvision.transforms.functional.hflip(x)
                 y = torchvision.transforms.functional.hflip(y)
 
-            if torch.rand(1) > 0.5:
-                x = torchvision.transforms.functional.vflip(x)
-                y = torchvision.transforms.functional.vflip(y)
+            # if torch.rand(1) > 0.5:
+            #     x = torchvision.transforms.functional.vflip(x)
+            #     y = torchvision.transforms.functional.vflip(y)
 
         return x, y
