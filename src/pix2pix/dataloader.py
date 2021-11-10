@@ -1,8 +1,5 @@
 import torch
-
-import pathlib
 import helper
-
 from typing import List
 
 
@@ -41,11 +38,10 @@ class lfw_dataset(torch.utils.data.Dataset):
 
     def __init__(
         self,
-        rootdir: str,
+        img_paths,
         transforms: List = None,
     ):
-        self.rootdir = pathlib.Path(rootdir)
-        self.file_list = list(self.rootdir.rglob("*.jpg"))
+        self.file_list = img_paths
         self.transforms = transforms
 
     def __len__(self):
@@ -71,14 +67,12 @@ class lfw_dataset(torch.utils.data.Dataset):
             idx = idx.to_list()
 
         img_path = self.file_list[idx]
-        target = torch.tensor(
-            helper.read_img(str(img_path)), dtype=torch.float32
-        )
-        target = target / 255.0
+        target = torch.tensor(helper.read_img(img_path), dtype=torch.float32)
+        target = (target / (255 / 2)) - 1
         target = target.permute((2, 0, 1))
         ip = target.clone()
 
         if self.transforms:
-            ip = self.transforms(ip)
+            ip, target = self.transforms([ip, target])
 
         return ip, target
