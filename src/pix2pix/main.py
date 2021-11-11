@@ -17,16 +17,6 @@ torch.backends.cudnn.benchmark = False
 
 logger = logging.getLogger(__name__)
 
-
-def init_weights(net: torch.nn.Module, scaling: int = 0.02) -> None:
-    def init_func(m: torch.nn.Module) -> None:
-        classname = m.__class__.__name__
-        if hasattr(m, "weight") and (classname.find("Conv")) != -1:
-            torch.nn.init.normal_(m.weight.data, 0.0, scaling)
-
-    net.apply(init_func)
-
-
 if __name__ == "__main__":
     logger.info("starting training...")
     img_list = [str(x) for x in pathlib.Path(dataset.DATASET_PATH).rglob("*.jpg")]
@@ -71,7 +61,7 @@ if __name__ == "__main__":
 
     logger.info("loading models...")
     gen = models.unet(norm_layer=torch.nn.InstanceNorm2d, **model.GEN_ARGS)
-    init_weights(gen)
+    helper.init_weights(gen)
     gen = torch.nn.DataParallel(gen)
     disc = models.patchGAN(norm_layer=torch.nn.InstanceNorm2d, **model.DISC_ARGS)
 

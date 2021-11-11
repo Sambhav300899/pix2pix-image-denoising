@@ -6,7 +6,7 @@ from typing import List
 logger = logging.getLogger(__name__)
 
 
-def gaussian_noise(img: torch.Tensor) -> torch.Tensor:
+def gaussian_noise(img: torch.Tensor, std_div_denum: int = 1) -> torch.Tensor:
     """
     Function to add gaussian noise to an image. The noise will
     have a mean of 0 and std_dev anywhere between 0 and 1, this is
@@ -17,7 +17,7 @@ def gaussian_noise(img: torch.Tensor) -> torch.Tensor:
     Retruns:
         img (py:obj:`torch.Tensor`): input image + random gaussian noise
     """
-    std = torch.rand(1)
+    std = torch.rand(1) / std_div_denum
     mean = 0
 
     logger.debug("adding noise to img with std: {std} and mean: {mean}")

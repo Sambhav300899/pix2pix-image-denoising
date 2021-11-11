@@ -131,3 +131,4 @@ dmypy.json
 # custom
 generated
 models
+notebooks/predict_on_videos/videos

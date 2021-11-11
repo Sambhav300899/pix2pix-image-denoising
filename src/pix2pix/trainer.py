@@ -154,7 +154,7 @@ class pix2pix_trainer:
             self.history["val_ssim"].append(val_ssim)
             # self.history["val_psnr"].append(val_psnr)
 
-            print(f"val_gen_loss: {val_gen_loss:.03f} - val_mae: {val_mae:.03f}")
+            print(f"val_gen_loss: {val_gen_loss:.03f} - val_mae: {val_mae:.03f} - val_ssim {val_ssim:.03f}")
             print()
 
             if self.save_checkpoints:
@@ -170,14 +170,14 @@ class pix2pix_trainer:
                 self._log_mlflow_metrics_for_epoch(epoch)
 
         self._plot()
-        gen_save_path = os.path.join(self.model_save_dir, "gen_" + self.model_name + ".pth")
-        disc_save_path = os.path.join(self.model_save_dir, "disc_" + self.model_name + ".pth")
+        gen_save_path = os.path.join(self.model_save_dir, "gen_" + self.model_name + ".pt")
+        disc_save_path = os.path.join(self.model_save_dir, "disc_" + self.model_name + ".pt")
 
         logger.info(f"saving final generator model to {gen_save_path}")
-        torch.save(self.gen, gen_save_path)
+        torch.save(self.gen.state_dict(), gen_save_path)
 
         logger.info(f"saving final discriminator model to {disc_save_path}")
-        torch.save(self.disc, disc_save_path)
+        torch.save(self.disc.state_dict(), disc_save_path)
 
         logger.info(f"saving model history to {self.model_save_dir}")
         helper.save_json(self.history, os.path.join(self.model_save_dir, "history.json"))
@@ -226,7 +226,7 @@ class pix2pix_trainer:
 
             # desired targets for the discriminator
             self.optim_d.zero_grad()
-            real_target = torch.ones(ip.shape[0], 1, 30, 30).to(self.device) - 0.2
+            real_target = torch.ones(ip.shape[0], 1, 30, 30).to(self.device)
             fake_target = torch.zeros(ip.shape[0], 1, 30, 30).to(self.device)
 
             # get preds from generator
@@ -412,15 +412,15 @@ class pix2pix_trainer:
         """
         gen_ckpt_save_path = os.path.join(
             self.checkpoint_dir,
-            f"gen_epoch_{epoch_num}_" + self.model_name + ".pth",
+            f"gen_epoch_{epoch_num}_" + self.model_name + ".pt",
         )
         disc_ckpt_save_path = os.path.join(
             self.checkpoint_dir,
-            f"disc_epoch_{epoch_num}_" + self.model_name + ".pth",
+            f"disc_epoch_{epoch_num}_" + self.model_name + ".pt",
         )
 
-        torch.save(self.gen, gen_ckpt_save_path)
-        torch.save(self.disc, disc_ckpt_save_path)
+        torch.save(self.gen.state_dict(), gen_ckpt_save_path)
+        torch.save(self.disc.state_dict(), disc_ckpt_save_path)
 
     def _plot(self) -> None:
         """

@@ -2,8 +2,18 @@ import cv2
 import json
 import logging
 import numpy as np
+import torch
 
 logger = logging.getLogger(__name__)
+
+
+def init_weights(net: torch.nn.Module, scaling: int = 0.02) -> None:
+    def init_func(m: torch.nn.Module) -> None:
+        classname = m.__class__.__name__
+        if hasattr(m, "weight") and (classname.find("Conv")) != -1:
+            torch.nn.init.normal_(m.weight.data, 0.0, scaling)
+
+    net.apply(init_func)
 
 
 def read_img(img_path: str) -> np.array:
