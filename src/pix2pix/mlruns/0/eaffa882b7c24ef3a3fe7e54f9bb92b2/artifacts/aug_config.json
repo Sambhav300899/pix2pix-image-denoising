@@ -1,0 +1,12 @@
+{
+  "TRAIN_AUGS": {
+    "gaussian_noise": true,
+    "random_mirroring": true
+  },
+  "VAL_AUGS": {
+    "gaussian_noise": true
+  },
+  "TEST_AUGS": {
+    "gaussian_noise": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "DATASET_PATH": "../../generated/lfw",
+  "TRAIN_VAL_TEST_SPLIT": [
+    0.6,
+    0.2,
+    0.2
+  ],
+  "IMAGE_SIZE": 256,
+  "SHUFFLE_TRAIN": true,
+  "SHUFFLE_VAL": false,
+  "SHUFFLE_TEST": false,
+  "BATCH_SIZE": 4
+}

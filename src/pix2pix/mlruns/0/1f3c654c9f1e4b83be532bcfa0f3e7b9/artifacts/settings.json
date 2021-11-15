@@ -1,0 +1,6 @@
+{
+  "CHECKPOINT_PATH": "",
+  "CONTINUE_FROM_CHECKPOINT": false,
+  "SAVE_DIRECTORY": "../../models",
+  "DEVICE": "cuda"
+}

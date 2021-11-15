@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>API Documentation &mdash; Pix2Pix  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +14,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -75,39 +73,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
 
-
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="api-documentation">
+  <div class="section" id="api-documentation">
 <h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline"></a></h1>
 <p>A list of tutorials in the form of python notebooks for different tasks using
 spacesenseds</p>
-<section id="module-pix2pix.augmentations">
+<div class="section" id="module-pix2pix.augmentations">
 <span id="augmentations"></span><h2>augmentations<a class="headerlink" href="#module-pix2pix.augmentations" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.augmentations.gaussian_noise">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.augmentations.</span></span><span class="sig-name descname"><span class="pre">gaussian_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_div_denum</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/augmentations.html#gaussian_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.augmentations.gaussian_noise" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.augmentations.</span></span><span class="sig-name descname"><span class="pre">gaussian_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std_div_denum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/augmentations.html#gaussian_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.augmentations.gaussian_noise" title="Permalink to this definition"></a></dt>
 <dd><p>Function to add gaussian noise to an image. The noise will
 have a mean of 0 and std_dev anywhere between 0 and 1, this is
 picked randomly</p>
@@ -124,7 +98,7 @@ picked randomly</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pix2pix.augmentations.augs">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pix2pix.augmentations.</span></span><span class="sig-name descname"><span class="pre">augs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(256,</span> <span class="pre">256)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_noise</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_mirroring</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/augmentations.html#augs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.augmentations.augs" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pix2pix.augmentations.</span></span><span class="sig-name descname"><span class="pre">augs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(256,</span> <span class="pre">256)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_noise</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_mirroring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/augmentations.html#augs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.augmentations.augs" title="Permalink to this definition"></a></dt>
 <dd><p>Class to add augmentations to images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -137,12 +111,12 @@ picked randomly</p>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-pix2pix.dataloader">
+</div>
+<div class="section" id="module-pix2pix.dataloader">
 <span id="dataloader"></span><h2>dataloader<a class="headerlink" href="#module-pix2pix.dataloader" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pix2pix.dataloader.lfw_dataset">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pix2pix.dataloader.</span></span><span class="sig-name descname"><span class="pre">lfw_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_paths</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pix2pix.augmentations.augs" title="pix2pix.augmentations.augs"><span class="pre">pix2pix.augmentations.augs</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/dataloader.html#lfw_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.dataloader.lfw_dataset" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pix2pix.dataloader.</span></span><span class="sig-name descname"><span class="pre">lfw_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pix2pix.augmentations.augs" title="pix2pix.augmentations.augs"><span class="pre">pix2pix.augmentations.augs</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/dataloader.html#lfw_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.dataloader.lfw_dataset" title="Permalink to this definition"></a></dt>
 <dd><p>Class to load the lfw dataset for an image to image translation model. Pass
 the operations to be applied to the input image as transforms to the class.</p>
 <p>For model training
@@ -165,12 +139,12 @@ defaults to None</p></li>
 
 </dd></dl>
 
-</section>
-<section id="module-pix2pix.helper">
+</div>
+<div class="section" id="module-pix2pix.helper">
 <span id="helper"></span><h2>helper<a class="headerlink" href="#module-pix2pix.helper" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.helper.read_img">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.helper.</span></span><span class="sig-name descname"><span class="pre">read_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.array</span></span></span><a class="reference internal" href="_modules/pix2pix/helper.html#read_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.helper.read_img" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.helper.</span></span><span class="sig-name descname"><span class="pre">read_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.array</span></span></span><a class="reference internal" href="_modules/pix2pix/helper.html#read_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.helper.read_img" title="Permalink to this definition"></a></dt>
 <dd><p>Read image with opencv and convert it to RGB</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -187,7 +161,7 @@ defaults to None</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.helper.save_json">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.helper.</span></span><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_save</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pix2pix/helper.html#save_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.helper.save_json" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.helper.</span></span><span class="sig-name descname"><span class="pre">save_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_to_save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pix2pix/helper.html#save_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.helper.save_json" title="Permalink to this definition"></a></dt>
 <dd><p>Save json dict to specified file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -199,12 +173,12 @@ defaults to None</p></li>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-pix2pix.losses">
+</div>
+<div class="section" id="module-pix2pix.losses">
 <span id="losses"></span><h2>losses<a class="headerlink" href="#module-pix2pix.losses" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.losses.gen_loss">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.losses.</span></span><span class="sig-name descname"><span class="pre">gen_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generated_img</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_img</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disc_fake_y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_target</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_param</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/losses.html#gen_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.losses.gen_loss" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.losses.</span></span><span class="sig-name descname"><span class="pre">gen_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generated_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_img</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disc_fake_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/losses.html#gen_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.losses.gen_loss" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate generator loss according to computation from original paper</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -227,7 +201,7 @@ defaults to None</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.losses.disc_loss">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.losses.</span></span><span class="sig-name descname"><span class="pre">disc_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/losses.html#disc_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.losses.disc_loss" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.losses.</span></span><span class="sig-name descname"><span class="pre">disc_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/losses.html#disc_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.losses.disc_loss" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate discriminator loss according to computation from original paper</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -245,12 +219,12 @@ defaults to None</p></li>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-pix2pix.metrics">
+</div>
+<div class="section" id="module-pix2pix.metrics">
 <span id="metrics"></span><h2>metrics<a class="headerlink" href="#module-pix2pix.metrics" title="Permalink to this headline"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.metrics.ssim">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">ssim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor_1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tensor_2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#ssim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.ssim" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">ssim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tensor_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#ssim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.ssim" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate ssim between two tensors (does not work for batches)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -270,7 +244,7 @@ defaults to None</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.metrics.psnr">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">psnr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor_1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tensor_2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#psnr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.psnr" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">psnr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tensor_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#psnr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.psnr" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate psnr between two tensors (does not work for batches)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -290,7 +264,7 @@ defaults to None</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.metrics.ssim_for_batch">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">ssim_for_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#ssim_for_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.ssim_for_batch" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">ssim_for_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#ssim_for_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.ssim_for_batch" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate ssim between two tensor batches</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -310,7 +284,7 @@ defaults to None</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pix2pix.metrics.psnr_for_batch">
-<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">psnr_for_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#psnr_for_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.psnr_for_batch" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pix2pix.metrics.</span></span><span class="sig-name descname"><span class="pre">psnr_for_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/metrics.html#psnr_for_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.metrics.psnr_for_batch" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate psnr between two tensor batches</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,12 +302,12 @@ defaults to None</p></li>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-pix2pix.models">
+</div>
+<div class="section" id="module-pix2pix.models">
 <span id="models"></span><h2>models<a class="headerlink" href="#module-pix2pix.models" title="Permalink to this headline"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pix2pix.models.unet_skip_connection_block">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pix2pix.models.</span></span><span class="sig-name descname"><span class="pre">unet_skip_connection_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">outer_nc:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">inner_nc:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">input_nc:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">submodule:</span> <span class="pre">Optional[torch.nn.modules.module.Module]</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">outermost:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">innermost:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em>, <em class="sig-param"><span class="pre">norm_layer:</span> <span class="pre">torch.nn.modules.module.Module</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.batchnorm.BatchNorm2d'&gt;</span></em>, <em class="sig-param"><span class="pre">use_dropout:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/models.html#unet_skip_connection_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet_skip_connection_block" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pix2pix.models.</span></span><span class="sig-name descname"><span class="pre">unet_skip_connection_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outer_nc:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inner_nc:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_nc:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">submodule:</span> <span class="pre">Optional[torch.nn.modules.module.Module]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outermost:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">innermost:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_layer:</span> <span class="pre">torch.nn.modules.module.Module</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.batchnorm.BatchNorm2d'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_dropout:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/models.html#unet_skip_connection_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet_skip_connection_block" title="Permalink to this definition"></a></dt>
 <dd><p>skip connection block to build u-net recursively from the center to sides</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -351,7 +325,7 @@ defaults to None</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="pix2pix.models.unet_skip_connection_block.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/models.html#unet_skip_connection_block.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet_skip_connection_block.forward" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/models.html#unet_skip_connection_block.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet_skip_connection_block.forward" title="Permalink to this definition"></a></dt>
 <dd><p>Run forward pass for the network/layer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -370,7 +344,7 @@ defaults to None</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pix2pix.models.unet">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pix2pix.models.</span></span><span class="sig-name descname"><span class="pre">unet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">input_nc:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">output_nc:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">num_init_filters:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">64</span></em>, <em class="sig-param"><span class="pre">norm_layer:</span> <span class="pre">torch.nn.modules.module.Module</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.batchnorm.BatchNorm2d'&gt;</span></em>, <em class="sig-param"><span class="pre">use_dropout:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/models.html#unet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pix2pix.models.</span></span><span class="sig-name descname"><span class="pre">unet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_nc:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_nc:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_init_filters:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_layer:</span> <span class="pre">torch.nn.modules.module.Module</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.batchnorm.BatchNorm2d'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_dropout:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/models.html#unet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet" title="Permalink to this definition"></a></dt>
 <dd><p>skip connection block to build u-net recursively from the center to sides</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -385,7 +359,7 @@ defaults to None</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="pix2pix.models.unet.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/models.html#unet.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet.forward" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/models.html#unet.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.unet.forward" title="Permalink to this definition"></a></dt>
 <dd><p>Run forward pass for the network/layer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -404,7 +378,7 @@ defaults to None</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pix2pix.models.patchGAN">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pix2pix.models.</span></span><span class="sig-name descname"><span class="pre">patchGAN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">input_nc:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">num_init_filters:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">64</span></em>, <em class="sig-param"><span class="pre">num_layers:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">3</span></em>, <em class="sig-param"><span class="pre">norm_layer:</span> <span class="pre">torch.nn.modules.module.Module</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.batchnorm.BatchNorm2d'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/models.html#patchGAN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.patchGAN" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pix2pix.models.</span></span><span class="sig-name descname"><span class="pre">patchGAN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_nc:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_init_filters:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_layers:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_layer:</span> <span class="pre">torch.nn.modules.module.Module</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'torch.nn.modules.batchnorm.BatchNorm2d'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pix2pix/models.html#patchGAN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.patchGAN" title="Permalink to this definition"></a></dt>
 <dd><p>skip connection block to build u-net recursively from the center to sides</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -418,7 +392,7 @@ defaults to None</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="pix2pix.models.patchGAN.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/models.html#patchGAN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.patchGAN.forward" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.Tensor</span></span></span><a class="reference internal" href="_modules/pix2pix/models.html#patchGAN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pix2pix.models.patchGAN.forward" title="Permalink to this definition"></a></dt>
 <dd><p>Run forward pass for the network/layer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -435,8 +409,8 @@ defaults to None</p></li>
 
 </dd></dl>
 
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

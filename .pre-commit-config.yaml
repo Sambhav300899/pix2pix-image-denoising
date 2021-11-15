@@ -9,7 +9,7 @@ repos:
   - id: requirements-txt-fixer
   - id: check-added-large-files
     args:
-      - --maxkb=50000
+      - --maxkb=1000000
 - repo: https://github.com/ambv/black
   rev: 20.8b0
   hooks:

@@ -1,0 +1,6 @@
+{
+  "GEN_LR": 0.002,
+  "DISC_LR": 0.002,
+  "EPOCHS": 20,
+  "SAVE_CHECKPOINTS": true
+}

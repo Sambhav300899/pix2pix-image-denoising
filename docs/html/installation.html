@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installation &mdash; Pix2Pix  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +14,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,6 +42,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#clone-the-library">Clone the library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-library-in-dev-mode">Installing library in dev mode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installing-library-in-normal-mode">Installing library in normal mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-pytorch-v1-8">Install PyTorch (v1.8 &gt;)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-tensorrt">Install Tensorrt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-torch2trt">Install torch2trt</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="apidocs.html">API Documentation</a></li>
@@ -73,52 +74,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
 
-
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="installation">
+  <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
 <p>To install the library follow the instructions below.</p>
-<section id="clone-the-library">
+<div class="section" id="clone-the-library">
 <h2>Clone the library<a class="headerlink" href="#clone-the-library" title="Permalink to this headline"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Sambhav300899/pix2pix-image-denoising.git
 </pre></div>
 </div>
-</section>
-<section id="installing-library-in-dev-mode">
+</div>
+<div class="section" id="installing-library-in-dev-mode">
 <h2>Installing library in dev mode<a class="headerlink" href="#installing-library-in-dev-mode" title="Permalink to this headline"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -e <span class="s2">&quot;.[dev]&quot;</span>
 </pre></div>
 </div>
-</section>
-<section id="installing-library-in-normal-mode">
+</div>
+<div class="section" id="installing-library-in-normal-mode">
 <h2>Installing library in normal mode<a class="headerlink" href="#installing-library-in-normal-mode" title="Permalink to this headline"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install .
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+<div class="section" id="install-pytorch-v1-8">
+<h2>Install PyTorch (v1.8 &gt;)<a class="headerlink" href="#install-pytorch-v1-8" title="Permalink to this headline"></a></h2>
+<p>Instructions to install PyTorch can be found here <a class="reference external" href="https://pytorch.org/">https://pytorch.org/</a></p>
+</div>
+<div class="section" id="install-tensorrt">
+<h2>Install Tensorrt<a class="headerlink" href="#install-tensorrt" title="Permalink to this headline"></a></h2>
+<p>TensorRT installation instructions can be found here <a class="reference external" href="https://docs.nvidia.com/deeplearning/tensorrt/api/python_api/">https://docs.nvidia.com/deeplearning/tensorrt/api/python_api/</a></p>
+</div>
+<div class="section" id="install-torch2trt">
+<h2>Install torch2trt<a class="headerlink" href="#install-torch2trt" title="Permalink to this headline"></a></h2>
+<p>torch2trt installation instructions can be found here <a class="reference external" href="https://github.com/NVIDIA-AI-IOT/torch2trt">https://github.com/NVIDIA-AI-IOT/torch2trt</a></p>
+</div>
+</div>
 
 
            </div>

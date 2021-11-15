@@ -1,0 +1,11 @@
+{
+  "GEN_ARGS": {
+    "input_nc": 3,
+    "output_nc": 3,
+    "num_init_filters": 64,
+    "use_dropout": false
+  },
+  "DISC_ARGS": {
+    "input_nc": 6
+  }
+}

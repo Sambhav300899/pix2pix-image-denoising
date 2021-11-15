@@ -1,0 +1,15 @@
+artifact_uri: file:///home/sambhav/pix2pix-image-denoising/src/pix2pix/mlruns/0/494edcfccf0b404daf7734d5062b913f/artifacts
+end_time: 1636838362631
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 494edcfccf0b404daf7734d5062b913f
+run_uuid: 494edcfccf0b404daf7734d5062b913f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1636828233832
+status: 3
+tags: []
+user_id: sambhav

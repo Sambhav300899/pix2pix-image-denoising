@@ -33,7 +33,6 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx_rtd_theme",
     "sphinx.ext.napoleon",
-    "nbsphinx",
     "sphinx.ext.viewcode",
 ]
 

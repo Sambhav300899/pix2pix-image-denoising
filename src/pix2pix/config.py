@@ -10,7 +10,7 @@ logging.basicConfig(
 
 
 class Dataset(BaseSettings):
-    DATASET_PATH: str = "../../../generated/lfw/"
+    DATASET_PATH: str = "../../generated/lfw/"
     TRAIN_VAL_TEST_SPLIT: List[float] = [0.6, 0.2, 0.2]
 
     if sum(TRAIN_VAL_TEST_SPLIT) != 1:
@@ -56,7 +56,7 @@ settings = Settings()
 class Training(BaseSettings):
     GEN_LR: float = 2e-4
     DISC_LR: float = 2e-4
-    EPOCHS: int = 10
+    EPOCHS: int = 1
     SAVE_CHECKPOINTS: bool = True
 
 
